@@ -1,0 +1,38 @@
+[
+  {
+    "id": 1,
+    "title": "Reflected XSS in Search Parameter",
+    "severity": "Medium",
+    "target": "example-target.com",
+    "program": "CyberComlho",
+    "status": "Resolved",
+    "date": "16-11-2025",
+    "reward_inr": "₹1000",
+    "cve": "",
+    "description": "Unsanitized user input in the search query parameter was reflected directly into the HTML response, allowing script injection."
+  },
+  {
+    "id": 2,
+    "title": "Sensitive Backup File Exposure",
+    "severity": "High",
+    "target": "https://ehrapp.maxhealthcare.in",
+    "program": "CyberComlho",
+    "status": "Resolved",
+    "date": "04-06-2025",
+    "reward_inr": "₹5000.00",
+    "cve": "",
+    "description": "The web server at https://ehrapp.maxhealthcare.in is publicly exposing a backup archive file named web.tar. This archive likely contains source code, configuration files, or other sensitive data related to the web application. Exposure of such files can lead to serious security risks including source code disclosure, leakage of credentials, and further exploitation of application vulnerabilities."
+  },
+  {
+    "id": 3,
+    "title": "Business Logic Error",
+    "severity": "Medium",
+    "target": "auth.someservice.com",
+    "program": "Yeswehack(Private Program)",
+    "status": "Accepted",
+    "date": "22-01-2026",
+    "reward_usd": "Pending",
+    "cve": "",
+    "description": "The application’s signup process includes a phone number verification step that is intended to confirm the user's phone number before allowing them to proceed to the review and final account creation stage."
+  }
+]

@@ -1,0 +1,441 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>Bug Bounty Hall of Fame | Uppala Satya Sai</title>
+  <link rel="icon" href="img/gallery/favicon.png" type="image/png" sizes="20x20">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+  <link href="https://fonts.googleapis.com/css?family=Heebo:300,400,700,900|Roboto:300,400,500,700" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Roboto', sans-serif;
+      background: #f9f9ff;
+      color: #777;
+    }
+
+    /* ── HERO ── */
+    .hero {
+      background: linear-gradient(135deg, #766dff 0%, #88f3ff 100%);
+      padding: 70px 20px 120px;
+      text-align: center;
+      position: relative;
+    }
+    .hero a.back {
+      position: absolute;
+      top: 24px;
+      left: 30px;
+      color: rgba(255,255,255,0.85);
+      font-size: 14px;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: color .2s;
+    }
+    .hero a.back:hover { color: #fff; }
+    .hero h1 {
+      font-family: 'Heebo', sans-serif;
+      font-size: 42px;
+      font-weight: 900;
+      color: #fff;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin-bottom: 12px;
+    }
+    .hero p {
+      color: rgba(255,255,255,0.85);
+      font-size: 16px;
+      max-width: 560px;
+      margin: 0 auto;
+      line-height: 1.7;
+    }
+
+    /* ── STATS BAR ── */
+    .stats-bar {
+      max-width: 900px;
+      margin: -48px auto 0;
+      background: #fff;
+      border-radius: 14px;
+      box-shadow: 0 10px 40px rgba(118,109,255,0.15);
+      display: flex;
+      justify-content: space-around;
+      padding: 28px 20px;
+      position: relative;
+      z-index: 2;
+    }
+    .stat-item { text-align: center; }
+    .stat-item .num {
+      font-family: 'Heebo', sans-serif;
+      font-size: 32px;
+      font-weight: 900;
+      background: linear-gradient(135deg, #766dff, #88f3ff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .stat-item .label {
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: #aaa;
+      margin-top: 4px;
+    }
+
+    /* ── MAIN CONTENT ── */
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 60px 20px 80px;
+    }
+
+    /* ── FILTERS ── */
+    .filters {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 36px;
+      align-items: center;
+    }
+    .filter-btn {
+      padding: 7px 20px;
+      border-radius: 20px;
+      border: 1.5px solid #e0e0f0;
+      background: #fff;
+      font-size: 13px;
+      font-weight: 500;
+      color: #555;
+      cursor: pointer;
+      transition: all .2s;
+      font-family: 'Roboto', sans-serif;
+    }
+    .filter-btn:hover, .filter-btn.active {
+      background: linear-gradient(135deg, #766dff, #88f3ff);
+      color: #fff;
+      border-color: transparent;
+    }
+    .search-box {
+      margin-left: auto;
+      position: relative;
+    }
+    .search-box input {
+      padding: 8px 16px 8px 38px;
+      border: 1.5px solid #e0e0f0;
+      border-radius: 20px;
+      font-size: 13px;
+      outline: none;
+      font-family: 'Roboto', sans-serif;
+      width: 220px;
+      transition: border-color .2s;
+    }
+    .search-box input:focus { border-color: #766dff; }
+    .search-box i {
+      position: absolute;
+      left: 13px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #aaa;
+      font-size: 13px;
+    }
+
+    /* ── GRID ── */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 24px;
+    }
+
+    /* ── CARD ── */
+    .card {
+      background: #fff;
+      border-radius: 14px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+      overflow: hidden;
+      transition: transform .25s, box-shadow .25s;
+      display: flex;
+      flex-direction: column;
+    }
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 12px 36px rgba(118,109,255,0.15);
+    }
+    .card-top {
+      padding: 20px 22px 16px;
+      border-bottom: 1px solid #f0f0f8;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 10px;
+    }
+    .card-top h3 {
+      font-family: 'Heebo', sans-serif;
+      font-size: 16px;
+      font-weight: 700;
+      color: #222;
+      line-height: 1.4;
+    }
+    .badge {
+      display: inline-block;
+      padding: 3px 12px;
+      border-radius: 20px;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .5px;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+    .badge-Critical  { background: #fff0f0; color: #e53935; }
+    .badge-High      { background: #fff4e5; color: #f57c00; }
+    .badge-Medium    { background: #fffde7; color: #f9a825; }
+    .badge-Low       { background: #e8f5e9; color: #388e3c; }
+    .badge-Info      { background: #e3f2fd; color: #1976d2; }
+
+    .card-body {
+      padding: 16px 22px;
+      flex: 1;
+    }
+    .card-body p {
+      font-size: 13.5px;
+      line-height: 1.65;
+      color: #777;
+      margin-bottom: 16px;
+    }
+    .meta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      font-size: 12px;
+      color: #999;
+    }
+    .meta-row span {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+    .meta-row i { color: #766dff; font-size: 11px; }
+
+    .card-footer {
+      padding: 12px 22px;
+      background: #fafaff;
+      border-top: 1px solid #f0f0f8;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .status-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 12px;
+      font-weight: 600;
+      padding: 4px 12px;
+      border-radius: 20px;
+    }
+    .status-pill::before {
+      content: '';
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+    }
+    .status-Resolved    { background: #e8f5e9; color: #388e3c; }
+    .status-Resolved::before    { background: #388e3c; }
+    .status-Triaged     { background: #e3f2fd; color: #1976d2; }
+    .status-Triaged::before     { background: #1976d2; }
+    .status-Informative { background: #f3e5f5; color: #7b1fa2; }
+    .status-Informative::before { background: #7b1fa2; }
+    .status-Pending     { background: #fff8e1; color: #f57f17; }
+    .status-Pending::before     { background: #f57f17; }
+
+    .reward-wrap { text-align: right; }
+    .reward-usd {
+      font-family: 'Heebo', sans-serif;
+      font-size: 15px;
+      font-weight: 700;
+      color: #766dff;
+      display: block;
+    }
+    .reward-inr {
+      font-size: 11px;
+      color: #aaa;
+      display: block;
+      margin-top: 1px;
+    }
+
+    /* ── EMPTY STATE ── */
+    .empty {
+      text-align: center;
+      padding: 60px 20px;
+      color: #bbb;
+      grid-column: 1/-1;
+    }
+    .empty i { font-size: 48px; margin-bottom: 16px; display: block; }
+
+    /* ── FOOTER ── */
+    .page-footer {
+      background: #000;
+      text-align: center;
+      padding: 24px;
+      color: #777;
+      font-size: 13px;
+      font-family: cursive;
+    }
+    .page-footer a { color: #766dff; text-decoration: none; }
+
+    @media (max-width: 600px) {
+      .hero h1 { font-size: 28px; }
+      .stats-bar { flex-wrap: wrap; gap: 20px; }
+      .search-box { margin-left: 0; width: 100%; }
+      .search-box input { width: 100%; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <a href="index.html" class="back"><i class="fa fa-arrow-left"></i> Back to Portfolio</a>
+  <h1>🐛 Bug Bounty Hall of Fame</h1>
+  <p>A curated list of security vulnerabilities I've responsibly disclosed across various bug bounty programs.</p>
+</div>
+
+<!-- STATS BAR -->
+<div class="stats-bar" id="statsBar">
+  <div class="stat-item"><div class="num" id="statTotal">0</div><div class="label">Total Findings</div></div>
+  <div class="stat-item"><div class="num" id="statCritical">0</div><div class="label">Critical</div></div>
+  <div class="stat-item"><div class="num" id="statHigh">0</div><div class="label">High</div></div>
+  <div class="stat-item"><div class="num" id="statReward">$0</div><div class="label">Total Rewards</div></div>
+</div>
+
+<!-- MAIN -->
+<div class="container">
+
+  <!-- FILTERS -->
+  <div class="filters">
+    <button class="filter-btn active" data-filter="All">All</button>
+    <button class="filter-btn" data-filter="Critical">Critical</button>
+    <button class="filter-btn" data-filter="High">High</button>
+    <button class="filter-btn" data-filter="Medium">Medium</button>
+    <button class="filter-btn" data-filter="Low">Low</button>
+    <button class="filter-btn" data-filter="Resolved">Resolved</button>
+    <button class="filter-btn" data-filter="Triaged">Triaged</button>
+    <div class="search-box">
+      <i class="fa fa-search"></i>
+      <input type="text" id="searchInput" placeholder="Search vulnerabilities...">
+    </div>
+  </div>
+
+  <!-- CARDS GRID -->
+  <div class="grid" id="bugsGrid"></div>
+
+</div>
+
+<!-- FOOTER -->
+<div class="page-footer">
+  Handcrafted with ❤ by <a href="https://github.com/SATYASAI-UPPALA" target="_blank">Uppala Satya Sai</a>
+</div>
+
+<script>
+  let allBugs = [];
+  let activeFilter = 'All';
+
+  fetch('bugs.json')
+    .then(r => r.json())
+    .then(data => {
+      allBugs = data;
+      updateStats(data);
+      renderCards(data);
+    })
+    .catch(() => {
+      document.getElementById('bugsGrid').innerHTML =
+        '<div class="empty"><i class="fa fa-exclamation-circle"></i>Could not load bugs.json. Make sure the file exists.</div>';
+    });
+
+  function updateStats(bugs) {
+    document.getElementById('statTotal').textContent = bugs.length;
+    document.getElementById('statCritical').textContent = bugs.filter(b => b.severity === 'Critical').length;
+    document.getElementById('statHigh').textContent = bugs.filter(b => b.severity === 'High').length;
+    const totalUsd = bugs.reduce((sum, b) => {
+      const n = parseFloat((b.reward_usd || '').replace(/[^0-9.]/g, ''));
+      return sum + (isNaN(n) ? 0 : n);
+    }, 0);
+    const totalInr = bugs.reduce((sum, b) => {
+      const n = parseFloat((b.reward_inr || '').replace(/[^0-9.,]/g, '').replace(/,/g, ''));
+      return sum + (isNaN(n) ? 0 : n);
+    }, 0);
+    document.getElementById('statReward').innerHTML =
+      '<span>$' + (totalUsd > 0 ? totalUsd.toLocaleString() : '0') + '</span>' +
+      '<br><small style="font-size:13px;background:none;-webkit-text-fill-color:#aaa;">&#8377;' + (totalInr > 0 ? totalInr.toLocaleString('en-IN') : '0') + '</small>';
+  }
+
+  function renderCards(bugs) {
+    const grid = document.getElementById('bugsGrid');
+    if (!bugs.length) {
+      grid.innerHTML = '<div class="empty"><i class="fa fa-bug"></i>No vulnerabilities match your filter.</div>';
+      return;
+    }
+    grid.innerHTML = bugs.map(b => `
+      <div class="card">
+        <div class="card-top">
+          <h3>${b.title}</h3>
+          <span class="badge badge-${b.severity}">${b.severity}</span>
+        </div>
+        <div class="card-body">
+          <p>${b.description}</p>
+          <div class="meta-row">
+            <span><i class="fa fa-globe"></i>${b.target}</span>
+            <span><i class="fa fa-flag"></i>${b.program}</span>
+            <span><i class="fa fa-calendar"></i>${formatDate(b.date)}</span>
+            ${b.cve ? `<span><i class="fa fa-tag"></i>${b.cve}</span>` : ''}
+          </div>
+        </div>
+        <div class="card-footer">
+          <span class="status-pill status-${b.status.replace(/\s/g,'')}">${b.status}</span>
+          <div class="reward-wrap">
+            ${b.reward_usd ? `<span class="reward-usd">${b.reward_usd}</span>` : ''}
+            ${b.reward_inr ? `<span class="reward-inr" style="font-size:14px;font-weight:700;color:#766dff;">${b.reward_inr}</span>` : ''}
+          </div>
+        </div>
+      </div>
+    `).join('');
+  }
+
+  function formatDate(d) {
+    if (!d) return '';
+    const dt = new Date(d);
+    return dt.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
+  }
+
+  function applyFilters() {
+    const q = document.getElementById('searchInput').value.toLowerCase();
+    let filtered = allBugs;
+    if (activeFilter !== 'All') {
+      filtered = filtered.filter(b => b.severity === activeFilter || b.status === activeFilter);
+    }
+    if (q) {
+      filtered = filtered.filter(b =>
+        b.title.toLowerCase().includes(q) ||
+        b.target.toLowerCase().includes(q) ||
+        b.description.toLowerCase().includes(q) ||
+        b.program.toLowerCase().includes(q)
+      );
+    }
+    renderCards(filtered);
+  }
+
+  document.querySelectorAll('.filter-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      activeFilter = btn.dataset.filter;
+      applyFilters();
+    });
+  });
+
+  document.getElementById('searchInput').addEventListener('input', applyFilters);
+</script>
+
+</body>
+</html>
