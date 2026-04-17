@@ -31,7 +31,7 @@
     "program": "Yeswehack(Private Program)",
     "status": "Accepted",
     "date": "22-01-2026",
-    "reward_usd": "Pending",
+    "reward_usd": "$100",
     "cve": "",
     "description": "The application’s signup process includes a phone number verification step that is intended to confirm the user's phone number before allowing them to proceed to the review and final account creation stage."
   }
