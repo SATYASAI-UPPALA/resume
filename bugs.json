@@ -29,7 +29,7 @@
     "severity": "Medium",
     "target": "auth.someservice.com",
     "program": "Yeswehack(Private Program)",
-    "status": "Accepted",
+    "status": "Resolved",
     "date": "22-01-2026",
     "reward_usd": "$100",
     "cve": "",
